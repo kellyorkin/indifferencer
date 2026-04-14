@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indifferencer, Inc.™ — Delivering Outcomes Regardless of Intent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0f;
+    --paper: #f5f2eb;
+    --corp-blue: #1a1a5e;
+    --corp-mid: #2e2e8a;
+    --accent: #c8a84b;
+    --accent-light: #e8d08b;
+    --muted: #6b6b7a;
+    --rule: #d4d0c8;
+    --danger: #8a1a1a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* TICKER */
+  .ticker {
+    background: var(--corp-blue);
+    color: var(--accent-light);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    padding: 6px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 40s linear infinite;
+  }
+  .ticker-inner span { margin: 0 3rem; }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--corp-blue);
+    text-decoration: none;
+  }
+  .nav-logo span {
+    font-size: 0.65rem;
+    vertical-align: super;
+    font-family: 'DM Mono', monospace;
+  }
+  .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--corp-blue); }
+  .nav-cta {
+    background: var(--corp-blue) !important;
+    color: var(--accent-light) !important;
+    padding: 0.5rem 1.2rem !important;
+    font-family: 'DM Mono', monospace !important;
+    font-size: 0.72rem !important;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 88vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    padding: 6rem 4rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--corp-blue);
+    margin-bottom: 1rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    max-width: 480px;
+  }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--corp-blue);
+    color: var(--accent-light);
+    padding: 0.9rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--corp-mid); transform: translateY(-1px); }
+  .btn-secondary {
+    color: var(--corp-blue);
+    padding: 0.9rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--corp-blue);
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { background: var(--corp-blue); color: var(--accent-light); }
+
+  .hero-right {
+    background: var(--corp-blue);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    overflow: hidden;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(200,168,75,0.04) 40px,
+      rgba(200,168,75,0.04) 41px
+    );
+  }
+  .hero-card-stack {
+    position: relative;
+    width: 280px;
+    height: 380px;
+  }
+  .hero-card {
+    position: absolute;
+    width: 240px;
+    background: var(--paper);
+    border: 1px solid var(--accent);
+    padding: 1.2rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    transition: transform 0.3s;
+  }
+  .hero-card:nth-child(1) { top: 0; left: 40px; transform: rotate(3deg); z-index: 1; }
+  .hero-card:nth-child(2) { top: 20px; left: 20px; transform: rotate(-1deg); z-index: 2; }
+  .hero-card:nth-child(3) { top: 35px; left: 0; transform: rotate(0deg); z-index: 3; }
+  .hero-card-stack:hover .hero-card:nth-child(1) { transform: rotate(8deg) translateX(20px); }
+  .hero-card-stack:hover .hero-card:nth-child(2) { transform: rotate(-4deg) translateX(-10px); }
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--corp-blue);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
+  }
+  .card-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.6rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .card-effect {
+    font-size: 0.72rem;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+  }
+  .card-flavor {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.65rem;
+    font-style: italic;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    padding-top: 0.4rem;
+  }
+
+  /* MARQUEE STRIP */
+  .strip {
+    background: var(--accent);
+    padding: 0.8rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .strip-inner {
+    display: inline-block;
+    animation: ticker 30s linear infinite;
+  }
+  .strip-inner span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--corp-blue);
+    margin: 0 2rem;
+    font-weight: 500;
+  }
+  .strip-inner span::before { content: '◆  '; }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 1.5rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 900;
+    color: var(--corp-blue);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ABOUT */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    border-top: 1px solid var(--rule);
+  }
+  .about-text p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+  }
+  .about-text p strong { color: var(--corp-blue); font-weight: 500; }
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .stat-box {
+    border: 1px solid var(--rule);
+    padding: 1.5rem;
+    position: relative;
+  }
+  .stat-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+  }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--corp-blue);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* CARD SHOWCASE */
+  .showcase { background: var(--corp-blue); }
+  .showcase .section-label { color: var(--accent); }
+  .showcase .section-title { color: var(--paper); }
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .showcase-card {
+    background: rgba(245,242,235,0.05);
+    border: 1px solid rgba(200,168,75,0.3);
+    padding: 1.5rem;
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .showcase-card:hover {
+    background: rgba(245,242,235,0.1);
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+  .sc-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    margin-bottom: 0.4rem;
+    border-bottom: 1px solid rgba(200,168,75,0.3);
+    padding-bottom: 0.5rem;
+  }
+  .sc-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    color: rgba(245,242,235,0.4);
+    margin-bottom: 0.7rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .sc-effect {
+    font-size: 0.78rem;
+    color: rgba(245,242,235,0.75);
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+  }
+  .sc-flavor {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.68rem;
+    font-style: italic;
+    color: var(--accent);
+    border-top: 1px solid rgba(200,168,75,0.2);
+    padding-top: 0.5rem;
+  }
+
+  /* MECHANICS */
+  .mechanics { border-top: 1px solid var(--rule); }
+  .mechanics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  .mechanic-item {
+    padding: 2rem;
+    border: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .mechanic-item:hover { border-color: var(--corp-blue); }
+  .mechanic-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 60px; height: 60px;
+    background: var(--accent);
+    opacity: 0.06;
+    clip-path: polygon(100% 0, 0 100%, 100% 100%);
+  }
+  .mechanic-icon {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .mechanic-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--corp-blue);
+    margin-bottom: 0.5rem;
+  }
+  .mechanic-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* EXPANSION TEASER */
+  .expansion {
+    background: #0f0f1a;
+    position: relative;
+    overflow: hidden;
+  }
+  .expansion::before {
+    content: 'TRADESHOWS';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 12rem;
+    font-weight: 900;
+    color: rgba(200,168,75,0.04);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .expansion .section-label { color: var(--accent); }
+  .expansion .section-title { color: var(--paper); }
+  .expansion-content {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+  .expansion-text p {
+    font-size: 0.95rem;
+    color: rgba(245,242,235,0.6);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  .expansion-text p strong { color: var(--accent-light); }
+  .expansion-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .exp-card-preview {
+    background: rgba(245,242,235,0.04);
+    border: 1px solid rgba(200,168,75,0.2);
+    padding: 0.8rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+  }
+  .exp-card-preview:hover {
+    background: rgba(245,242,235,0.08);
+    border-color: var(--accent);
+  }
+  .exp-card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    color: var(--accent-light);
+  }
+  .exp-card-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(245,242,235,0.3);
+    letter-spacing: 0.05em;
+  }
+  .exp-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(200,168,75,0.15);
+    color: var(--accent);
+    padding: 0.2rem 0.5rem;
+    border: 1px solid rgba(200,168,75,0.3);
+  }
+
+  /* PHILOSOPHY */
+  .philosophy {
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    padding: 5rem 4rem;
+  }
+  .philosophy blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    font-weight: 900;
+    font-style: italic;
+    color: var(--corp-blue);
+    max-width: 800px;
+    margin: 2rem auto;
+    line-height: 1.3;
+  }
+  .philosophy cite {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--corp-blue);
+    color: rgba(245,242,235,0.5);
+    padding: 3rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    border-top: 3px solid var(--accent);
+  }
+  .footer-brand .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    margin-bottom: 0.5rem;
+  }
+  .footer-brand p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    font-style: italic;
+    margin-bottom: 0.3rem;
+  }
+  .footer-col h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .footer-col a {
+    display: block;
+    font-size: 0.8rem;
+    color: rgba(245,242,235,0.5);
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--accent-light); }
+  .footer-bottom {
+    background: rgba(0,0,0,0.3);
+    padding: 1rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-bottom p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    color: rgba(245,242,235,0.3);
+  }
+
+  /* ANIMATIONS */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 300px; }
+    section { padding: 4rem 1.5rem; }
+    .about { grid-template-columns: 1fr; gap: 3rem; }
+    .showcase-grid { grid-template-columns: 1fr; }
+    .mechanics-grid { grid-template-columns: 1fr; }
+    .expansion-content { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-bottom { padding: 1rem 1.5rem; flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>BANDWIDTH FRAGMENTED</span>
+    <span>DISPLAYED: 7800</span>
+    <span>ACTUAL: 4200</span>
+    <span>MEETING PHASE ACTIVE</span>
+    <span>3 DISCUSSION EFFECTS QUEUED</span>
+    <span>ALL NEGATED</span>
+    <span>LEGACY SYSTEM MINOTAUR CANNOT BE TARGETED</span>
+    <span>ADMIN GOBLIN DENIED YOUR REQUEST</span>
+    <span>IT SCANNED YESTERDAY</span>
+    <span>TEMPORARY FIX APPLIED</span>
+    <span>BANDWIDTH FRAGMENTED</span>
+    <span>DISPLAYED: 7800</span>
+    <span>ACTUAL: 4200</span>
+    <span>MEETING PHASE ACTIVE</span>
+    <span>3 DISCUSSION EFFECTS QUEUED</span>
+    <span>ALL NEGATED</span>
+    <span>LEGACY SYSTEM MINOTAUR CANNOT BE TARGETED</span>
+    <span>ADMIN GOBLIN DENIED YOUR REQUEST</span>
+    <span>IT SCANNED YESTERDAY</span>
+    <span>TEMPORARY FIX APPLIED</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Indifferencer, Inc.<span>™</span></a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#cards">Cards</a>
+    <a href="#mechanics">Mechanics</a>
+    <a href="expansion.html">Expansions</a>
+    <a href="expansion.html" class="nav-cta">View Expansion →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Now Accepting Pre-Registration of Intent</div>
+    <h1>Meetings:<br><em>The Blathering</em></h1>
+    <p class="hero-sub">A competitive card game of strategic misalignment, weaponized bureaucracy, and documented outcomes that change nothing.</p>
+    <div class="hero-actions">
+      <a href="#cards" class="btn-primary">View the Cards</a>
+      <a href="expansion.html" class="btn-secondary">See Expansions</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card-stack">
+      <div class="hero-card">
+        <div class="card-name">Legacy System Minotaur</div>
+        <div class="card-type"><span>Beast / Effect</span><span>ATK 2100</span></div>
+        <div class="card-effect">Cannot be targeted by card effects. Once per turn: A random effect you control is negated.</div>
+        <div class="card-flavor">"It still works. It just doesn't work the way it used to. Or should. Or... ever did."</div>
+      </div>
+      <div class="hero-card">
+        <div class="card-name">Works on My Machine</div>
+        <div class="card-type"><span>Quick-Play Spell</span></div>
+        <div class="card-effect">Negate an opponent's effect. On your next turn, that same effect resolves successfully for you. No explanation is required.</div>
+      </div>
+      <div class="hero-card">
+        <div class="card-name">Admin Goblin</div>
+        <div class="card-type"><span>Fiend / Effect</span><span>ATK 900 / DEF 3200</span></div>
+        <div class="card-effect">Cannot be destroyed while holding an unresolved ticket. Once per turn: Deny one access request without explanation.</div>
+        <div class="card-flavor">"He's had that access since 2019. We don't know why."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-inner">
+    <span>Strategic Misalignment</span>
+    <span>Bandwidth Fragmentation</span>
+    <span>Unintended Use</span>
+    <span>Documentation Check</span>
+    <span>Meeting Phase</span>
+    <span>Thought Leader Tier™</span>
+    <span>Delivering Outcomes Regardless of Intent</span>
+    <span>Strategic Misalignment</span>
+    <span>Bandwidth Fragmentation</span>
+    <span>Unintended Use</span>
+    <span>Documentation Check</span>
+    <span>Meeting Phase</span>
+    <span>Thought Leader Tier™</span>
+    <span>Delivering Outcomes Regardless of Intent</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-text fade-in">
+    <div class="section-label">About the Game</div>
+    <h2 class="section-title">The Game That Plays Like Work. Unfortunately.</h2>
+    <p>Indifferencer, Inc.™ presents <strong>Meetings: The Blathering</strong> — a trading card game built from the raw material of enterprise dysfunction, documented in real time by people who have been there.</p>
+    <p>Reduce your opponent's <strong>Bandwidth to zero</strong> — or outlast them through strategic confusion, weaponized bureaucracy, and the occasional <em>Marginal Gain Victory</em>.</p>
+    <p>Every card came from a real wound. The flavor text is not satirical. It is testimony.</p>
+    <a href="#cards" class="btn-primary" style="margin-top:1rem;">See the Cards</a>
+  </div>
+  <div class="about-stats fade-in">
+    <div class="stat-box">
+      <div class="stat-number">8,000</div>
+      <div class="stat-label">Starting Bandwidth</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">4</div>
+      <div class="stat-label">Rarity Tiers incl. Thought Leader™</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">0</div>
+      <div class="stat-label">Meetings That Couldn't Have Been Emails</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">∞</div>
+      <div class="stat-label">Unresolved Tickets</div>
+    </div>
+  </div>
+</section>
+
+<!-- CARD SHOWCASE -->
+<section class="showcase" id="cards">
+  <div class="section-label">Featured Cards</div>
+  <h2 class="section-title" style="color:var(--paper)">The Roster So Far</h2>
+  <div class="showcase-grid">
+
+    <div class="showcase-card fade-in">
+      <div class="sc-name">Vendor Evangelist Hydra</div>
+      <div class="sc-type"><span>Hydra / Effect</span><span>ATK 2800 / DEF 2400</span></div>
+      <div class="sc-effect">Gains one additional attack per turn for each buzzword spoken (max 3). Once per turn: Shuffle one Agile Ritual from your deck into your opponent's deck.</div>
+    </div>
+
+    <div class="showcase-card fade-in">
+      <div class="sc-name">PowerPoint Lich</div>
+      <div class="sc-type"><span>Undead / Effect</span><span>ATK 1200 / DEF 3000</span></div>
+      <div class="sc-effect">Gains 1 Slide Counter each turn. Cannot be destroyed while it has counters. Opponent loses 100 Bandwidth per counter during standby phase.</div>
+    </div>
+
+    <div class="showcase-card fade-in">
+      <div class="sc-name">Principal Consultant Parrot</div>
+      <div class="sc-type"><span>Winged Beast / Effect</span><span>ATK 1400 / DEF 3100</span></div>
+      <div class="sc-effect">Special Summon condition: PowerPoint Lich must have 8+ Slide Counters. When summoned: Summon 2 additional copies. Each generates a 50-slide presentation. Slides 1–25 and 26–50 contain the same information formatted differently.</div>
+      <div class="sc-flavor">"I've taken the liberty of putting together a few thoughts."</div>
+    </div>
+
+    <div class="showcase-card fade-in">
+      <div class="sc-name">End User: Rooster</div>
+      <div class="sc-type"><span>Beast / End User / Effect</span><span>ATK 800 / DEF 800</span></div>
+      <div class="sc-effect">Cannot be redirected by the card that built the system. Activates Unintended Use once per turn without reading the documentation. Gains 500 ATK when adjacent to one specific player. That player did nothing to earn this.</div>
+      <div class="sc-flavor">"He just prefers JSON. His team used it on a project once…."</div>
+    </div>
+
+    <div class="showcase-card fade-in">
+      <div class="sc-name">Red X (Silent Failure)</div>
+      <div class="sc-type"><span>Trap Card</span></div>
+      <div class="sc-effect">When an effect fails, do not explain why. Opponent must guess.</div>
+    </div>
+
+    <div class="showcase-card fade-in">
+      <div class="sc-name">Temporary Fix</div>
+      <div class="sc-type"><span>Trap Card</span></div>
+      <div class="sc-effect">Restore 500 Fragmented Bandwidth to usable Bandwidth. Then Fragment 700.</div>
+      <div class="sc-flavor">"That should hold."</div>
+    </div>
+
+    <div class="showcase-card fade-in">
+      <div class="sc-name">Business Analyst Boar</div>
+      <div class="sc-type"><span>Beast / Effect</span><span>ATK 2200 / DEF 1800</span></div>
+      <div class="sc-effect">Once per turn: Identify the actual root cause of any problem on the field. When Principal Consultant Parrot is also on the field: Boar's effects resolve first. Parrot gets the draw.</div>
+    </div>
+
+    <div class="showcase-card fade-in">
+      <div class="sc-name">Out of Office Phantom</div>
+      <div class="sc-type"><span>Spirit / Effect</span><span>ATK 0 / DEF 0</span></div>
+      <div class="sc-effect">Cannot be targeted. Leaves the field at end of turn. While active: Opponent cannot interact with this card.</div>
+    </div>
+
+    <div class="showcase-card fade-in">
+      <div class="sc-name">The Room Where It Happens (But Nothing Gets Done)</div>
+      <div class="sc-type"><span>Field Spell</span></div>
+      <div class="sc-effect">All players may activate one additional effect during Meeting Phase. If more than 3 effects resolve: Negate all of them.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MECHANICS -->
+<section class="mechanics" id="mechanics">
+  <div class="section-label">Core Mechanics</div>
+  <h2 class="section-title">How the System Fails You</h2>
+  <div class="mechanics-grid">
+    <div class="mechanic-item fade-in">
+      <div class="mechanic-icon">⟁</div>
+      <div class="mechanic-title">Bandwidth System</div>
+      <div class="mechanic-desc">Replace Life Points with Bandwidth — your capacity to act, respond, and maintain operational coherence. Track both <strong>Displayed</strong> and <strong>Actual</strong> Bandwidth. They are never the same number. The game is managing the gap.</div>
+    </div>
+    <div class="mechanic-item fade-in">
+      <div class="mechanic-icon">◈</div>
+      <div class="mechanic-title">Bandwidth Fragmentation</div>
+      <div class="mechanic-desc">Fragmented Bandwidth still exists. Still counts toward your total. Cannot be used or referenced. It is, basically, <em>allocated but unavailable</em>. If Fragmentation exceeds 2000, all Tool Cards begin misfiring automatically.</div>
+    </div>
+    <div class="mechanic-item fade-in">
+      <div class="mechanic-icon">↺</div>
+      <div class="mechanic-title">Meeting Phase</div>
+      <div class="mechanic-desc">A new turn step before Battle Phase. Each player may activate one Discussion effect. If more than two activate, both players discard 1 card. <em>Flavor ruling: "This meeting could have been avoided."</em></div>
+    </div>
+    <div class="mechanic-item fade-in">
+      <div class="mechanic-icon">⚡</div>
+      <div class="mechanic-title">Unintended Use</div>
+      <div class="mechanic-desc">Cards with this keyword may be activated outside their intended parameters. Effects are unpredictable but cannot be negated by Documentation Check. The system wasn't built for this. It does it anyway.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPANSION TEASER -->
+<section class="expansion" id="expansion">
+  <div class="section-label">Coming Soon</div>
+  <h2 class="section-title">Special Edition:<br><em>Tradeshows — The Corporate Circus</em></h2>
+  <div class="expansion-content">
+    <div class="expansion-text">
+      <p>The base set documents the office. The special edition documents <strong>the floor</strong>.</p>
+      <p>A dedicated expansion set on the convention circuit — where the demos are pre-recorded, the pricing is custom, and the cocktail hour starts at six. Introduces <strong>Booth Space</strong> as a resource and a new field environment with its own ecosystem of cards, creatures, and catered suffering.</p>
+      <p>Featuring the <strong>All Access Badge of Unearned Privilege</strong>, the <strong>Convention Center Lunch</strong> field spell, and the <strong>Booth Babe Basilisk</strong> — whose gaze suspends all product evaluation until your next turn.</p>
+      <a href="expansion.html" class="btn-secondary" style="margin-top:1.5rem; border-color: var(--accent); color: var(--accent-light);">See Full Expansion →</a>
+    </div>
+    <div class="expansion-cards">
+      <div class="exp-card-preview">
+        <div>
+          <div class="exp-card-name">Booth Babe Basilisk</div>
+          <div class="exp-card-type">Reptile / Effect — ATK 1800 / DEF 1800</div>
+        </div>
+        <div class="exp-badge">Tradeshow</div>
+      </div>
+      <div class="exp-card-preview">
+        <div>
+          <div class="exp-card-name">Convention Center Lunch</div>
+          <div class="exp-card-type">Field Spell</div>
+        </div>
+        <div class="exp-badge">Tradeshow</div>
+      </div>
+      <div class="exp-card-preview">
+        <div>
+          <div class="exp-card-name">All Access Badge of Unearned Privilege</div>
+          <div class="exp-card-type">Equip / Magical Item — Thought Leader Tier™</div>
+        </div>
+        <div class="exp-badge">Ultra Rare</div>
+      </div>
+      <div class="exp-card-preview">
+        <div>
+          <div class="exp-card-name">Platform and Data Lion Tamer</div>
+          <div class="exp-card-type">Beast-Tamer / Effect — ATK 2300 / DEF 2000</div>
+        </div>
+        <div class="exp-badge">Thought Leader™</div>
+      </div>
+      <div class="exp-card-preview">
+        <div>
+          <div class="exp-card-name">Convention Center Bar</div>
+          <div class="exp-card-type">Field Spell — Replaces Convention Center Lunch</div>
+        </div>
+        <div class="exp-badge">Tradeshow</div>
+      </div>
+      <div class="exp-card-preview">
+        <div>
+          <div class="exp-card-name">Badge Lanyard of Dubious Authority</div>
+          <div class="exp-card-type">Equip Spell / Magical Item</div>
+        </div>
+        <div class="exp-badge">Rare</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <div class="section-label" style="justify-content:center;">Official Design Philosophy</div>
+  <blockquote>"If it makes sense,<br>it's probably underpowered."</blockquote>
+  <cite>— Indifferencer, Inc.™ Official Rulebook, Draft 1.0</cite>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-logo">Indifferencer, Inc.™</div>
+    <p>"Delivering outcomes regardless of intent."</p>
+    <p style="margin-top:0.8rem; font-size:0.7rem; font-family:'DM Sans',sans-serif;">A card game born from enterprise suffering.<br>All flavor text is testimony.</p>
+  </div>
+  <div class="footer-col">
+    <h4>The Game</h4>
+    <a href="#about">About</a>
+    <a href="#cards">Card List</a>
+    <a href="#mechanics">Mechanics</a>
+    <a href="#expansion">Expansions</a>
+  </div>
+  <div class="footer-col">
+    <h4>Indifferencer, Inc.™</h4>
+    <a href="#">indifferencer.com</a>
+    <a href="#">Design Philosophy</a>
+    <a href="#">Official Rulebook</a>
+    <a href="#">Thought Leader Tier™</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© Indifferencer, Inc.™ All outcomes delivered regardless of intent.</p>
+  <p>Bandwidth figures are Displayed values only. Actual Bandwidth may vary.</p>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

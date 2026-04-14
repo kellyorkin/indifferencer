@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tradeshows: The Corporate Circus — Indifferencer, Inc.™</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0f;
+    --paper: #f5f2eb;
+    --corp-blue: #1a1a5e;
+    --corp-mid: #2e2e8a;
+    --accent: #c8a84b;
+    --accent-light: #e8d08b;
+    --muted: #6b6b7a;
+    --rule: #d4d0c8;
+    --circus-red: #8a1a1a;
+    --circus-gold: #c8a84b;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); overflow-x: hidden; }
+
+  /* TICKER */
+  .ticker {
+    background: var(--circus-red);
+    color: var(--accent-light);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    padding: 6px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner { display: inline-block; animation: ticker 35s linear infinite; }
+  .ticker-inner span { margin: 0 3rem; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--corp-blue);
+    text-decoration: none;
+  }
+  .nav-logo span { font-size: 0.65rem; vertical-align: super; font-family: 'DM Mono', monospace; }
+  .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--corp-blue); }
+  .nav-back {
+    background: var(--corp-blue) !important;
+    color: var(--accent-light) !important;
+    padding: 0.5rem 1.2rem !important;
+    font-family: 'DM Mono', monospace !important;
+    font-size: 0.72rem !important;
+  }
+
+  /* HERO */
+  .exp-hero {
+    background: #0f0f1a;
+    position: relative;
+    overflow: hidden;
+    padding: 7rem 4rem 5rem;
+    text-align: center;
+  }
+  .exp-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 30px,
+      rgba(200,168,75,0.03) 30px,
+      rgba(200,168,75,0.03) 31px
+    );
+  }
+  .exp-hero::after {
+    content: 'CIRCUS';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 16rem;
+    font-weight: 900;
+    color: rgba(138,26,26,0.08);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .exp-badge-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--circus-red);
+    background: rgba(138,26,26,0.15);
+    border: 1px solid rgba(138,26,26,0.4);
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .exp-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 900;
+    color: var(--paper);
+    line-height: 1.0;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .exp-hero h1 em { color: var(--accent); font-style: italic; }
+  .exp-hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: rgba(245,242,235,0.5);
+    margin: 1rem auto 2rem;
+    max-width: 600px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+  }
+  .exp-hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    position: relative;
+    z-index: 2;
+  }
+  .meta-item { text-align: center; }
+  .meta-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,242,235,0.3);
+    margin-top: 0.2rem;
+  }
+
+  /* STRIP */
+  .strip {
+    background: var(--circus-red);
+    padding: 0.8rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .strip-inner { display: inline-block; animation: ticker 25s linear infinite; }
+  .strip-inner span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+    margin: 0 2rem;
+    font-weight: 500;
+  }
+  .strip-inner span::before { content: '★  '; }
+
+  /* SECTIONS */
+  section { padding: 5rem 4rem; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .section-label::before { content: ''; display: inline-block; width: 1.5rem; height: 1px; background: var(--accent); }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 900;
+    color: var(--corp-blue);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  /* INTRO */
+  .intro { border-top: 1px solid var(--rule); }
+  .intro-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; }
+  .intro-text p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+  .intro-text p strong { color: var(--corp-blue); }
+  .intro-mechanic {
+    background: var(--corp-blue);
+    padding: 2rem;
+    color: var(--paper);
+  }
+  .mechanic-heading {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .mechanic-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    margin-bottom: 0.8rem;
+  }
+  .mechanic-text { font-size: 0.82rem; color: rgba(245,242,235,0.7); line-height: 1.7; }
+  .mechanic-rule {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(200,168,75,0.2);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+  }
+
+  /* CARD GRID */
+  .cards-section { background: #faf8f2; border-top: 1px solid var(--rule); }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin-top: 2.5rem;
+  }
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    transition: all 0.25s;
+    overflow: hidden;
+    cursor: default;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,26,94,0.12); border-color: var(--accent); }
+  .card-header {
+    background: var(--corp-blue);
+    padding: 0.9rem 1rem 0.7rem;
+  }
+  .card-header.circus { background: var(--circus-red); }
+  .card-header.gold { background: #3a2a00; }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    margin-bottom: 0.2rem;
+  }
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .card-type-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    color: rgba(245,242,235,0.4);
+    letter-spacing: 0.05em;
+  }
+  .card-stats {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .card-body { padding: 1rem; }
+  .card-effect-text { font-size: 0.75rem; color: var(--ink); line-height: 1.6; margin-bottom: 0.7rem; }
+  .card-flavor-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.68rem;
+    font-style: italic;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    padding-top: 0.5rem;
+  }
+  .rarity-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.4rem;
+    margin-top: 0.5rem;
+  }
+  .rarity-common { background: rgba(107,107,122,0.1); color: var(--muted); border: 1px solid var(--rule); }
+  .rarity-rare { background: rgba(26,26,94,0.08); color: var(--corp-blue); border: 1px solid rgba(26,26,94,0.2); }
+  .rarity-ultra { background: rgba(138,26,26,0.08); color: var(--circus-red); border: 1px solid rgba(138,26,26,0.2); }
+  .rarity-tl { background: rgba(200,168,75,0.15); color: #6b4e00; border: 1px solid var(--accent); }
+
+  /* ENVIRONMENT */
+  .environment { background: var(--corp-blue); }
+  .environment .section-title { color: var(--paper); }
+  .env-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+  .env-item {
+    background: rgba(245,242,235,0.05);
+    border: 1px solid rgba(200,168,75,0.2);
+    padding: 1.5rem;
+    transition: all 0.2s;
+  }
+  .env-item:hover { background: rgba(245,242,235,0.09); border-color: var(--accent); }
+  .env-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent-light);
+    margin-bottom: 0.5rem;
+  }
+  .env-desc { font-size: 0.8rem; color: rgba(245,242,235,0.6); line-height: 1.6; }
+
+  /* LION TAMER SPOTLIGHT */
+  .spotlight {
+    border-top: 1px solid var(--rule);
+    background: linear-gradient(135deg, #0f0f1a 0%, #1a1a5e 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .spotlight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(200,168,75,0.08) 0%, transparent 60%);
+  }
+  .spotlight-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  .spotlight-text .section-label { color: var(--accent); }
+  .spotlight-text .section-title { color: var(--paper); }
+  .spotlight-text p { font-size: 0.95rem; color: rgba(245,242,235,0.6); line-height: 1.8; margin-bottom: 1rem; }
+  .spotlight-card {
+    background: var(--paper);
+    border: 2px solid var(--accent);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 60px rgba(200,168,75,0.1);
+    transform: rotate(-2deg);
+    transition: transform 0.3s;
+  }
+  .spotlight-card:hover { transform: rotate(0deg) scale(1.02); }
+  .spotlight-card .card-header { background: #2a1800; }
+  .tl-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--corp-blue);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    font-weight: 500;
+    margin-top: 0.3rem;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--corp-blue);
+    color: rgba(245,242,235,0.5);
+    padding: 3rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+    border-top: 3px solid var(--accent);
+  }
+  .footer-brand .footer-logo { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--accent-light); margin-bottom: 0.5rem; }
+  .footer-brand p { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.08em; font-style: italic; }
+  .footer-col h4 { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .footer-col a { display: block; font-size: 0.8rem; color: rgba(245,242,235,0.5); text-decoration: none; margin-bottom: 0.5rem; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--accent-light); }
+  .footer-bottom { background: rgba(0,0,0,0.3); padding: 1rem 4rem; display: flex; justify-content: space-between; }
+  .footer-bottom p { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.06em; color: rgba(245,242,235,0.3); }
+
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    section { padding: 3rem 1.5rem; }
+    .intro-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .env-grid { grid-template-columns: 1fr; }
+    .spotlight-inner { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; padding: 1rem 1.5rem; }
+    .exp-hero { padding: 4rem 1.5rem 3rem; }
+    .exp-hero-meta { gap: 1.5rem; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>BOOTH SPACE ALLOCATED</span>
+    <span>DEMO IS PRE-RECORDED</span>
+    <span>PRICING IS CUSTOM</span>
+    <span>COCKTAIL HOUR STARTS AT SIX</span>
+    <span>BADGE SCANNED YESTERDAY</span>
+    <span>CAESAR SALAD: $24</span>
+    <span>LETTUCE HAS GIVEN UP</span>
+    <span>PARROT FLOCK INCOMING</span>
+    <span>LION TAMER: THOUGHT LEADER TIER™</span>
+    <span>BOOTH SPACE ALLOCATED</span>
+    <span>DEMO IS PRE-RECORDED</span>
+    <span>PRICING IS CUSTOM</span>
+    <span>COCKTAIL HOUR STARTS AT SIX</span>
+    <span>BADGE SCANNED YESTERDAY</span>
+    <span>CAESAR SALAD: $24</span>
+    <span>LETTUCE HAS GIVEN UP</span>
+    <span>PARROT FLOCK INCOMING</span>
+    <span>LION TAMER: THOUGHT LEADER TIER™</span>
+  </div>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Indifferencer, Inc.<span>™</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#cards">Cards</a>
+    <a href="index.html#mechanics">Mechanics</a>
+    <a href="index.html" class="nav-back">← Base Set</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="exp-hero">
+  <div class="exp-badge-label">Special Edition Expansion</div>
+  <h1>Tradeshows:<br><em>The Corporate Circus</em></h1>
+  <p class="exp-hero-sub">Where the demos are pre-recorded, the pricing is custom, and the cocktail hour starts at six.</p>
+  <div class="exp-hero-meta">
+    <div class="meta-item">
+      <div class="meta-num">1</div>
+      <div class="meta-label">New Resource: Booth Space</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-num">2</div>
+      <div class="meta-label">Field Environments</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-num">1</div>
+      <div class="meta-label">Thought Leader Tier™ Card</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-num">∞</div>
+      <div class="meta-label">Follow-up Emails Never Sent</div>
+    </div>
+  </div>
+</div>
+
+<div class="strip">
+  <div class="strip-inner">
+    <span>Booth Space</span>
+    <span>Pre-Recorded Demo</span>
+    <span>Custom Pricing</span>
+    <span>Unearned Privilege</span>
+    <span>Suspended Evaluation</span>
+    <span>Badge Authority</span>
+    <span>The Corporate Circus</span>
+    <span>Booth Space</span>
+    <span>Pre-Recorded Demo</span>
+    <span>Custom Pricing</span>
+    <span>Unearned Privilege</span>
+    <span>Suspended Evaluation</span>
+    <span>Badge Authority</span>
+    <span>The Corporate Circus</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="intro-grid">
+    <div class="intro-text fade-in">
+      <div class="section-label">About This Expansion</div>
+      <h2 class="section-title">The Base Set Documents the Office.<br>This Documents <em>The Floor.</em></h2>
+      <p>The convention circuit is its own ecosystem — a place where <strong>spectacle substitutes for substance</strong>, where vendor credibility is measured in booth square footage, and where the Business Analyst Boar eats a sad sandwich from the convention center while watching his findings get rebranded by a flock of Parrots.</p>
+      <p>Tradeshows: The Corporate Circus introduces <strong>Booth Space</strong> as a new resource, a dedicated convention floor environment, and cards that can only be summoned in that environment. Bigger booth. More impressive cards. Completely unclear ROI.</p>
+      <p>The Platform and Data Lion Tamer finds her true home here — in the place where the circus never stopped being a circus, it just got a badge and a lanyard.</p>
+    </div>
+    <div class="intro-mechanic fade-in">
+      <div class="mechanic-heading">New Resource Mechanic</div>
+      <div class="mechanic-name">Booth Space</div>
+      <div class="mechanic-text">A resource representing literal square footage on the convention floor. More Booth Space enables more impressive Tradeshow cards. Booth Space costs real Bandwidth to acquire. ROI is always unclear.<br><br>Players begin with 0 Booth Space. It must be purchased during Main Phase using the Convention Floor field spell.</div>
+      <div class="mechanic-rule">1 Booth Space = 200 Bandwidth<br>Maximum Booth Space: 20<br>Unused Booth Space at end of duel: Counts for nothing.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CARDS -->
+<section class="cards-section" id="cards">
+  <div class="section-label">Expansion Card List</div>
+  <h2 class="section-title">Cards of the Corporate Circus</h2>
+  <div class="cards-grid">
+
+    <div class="card fade-in">
+      <div class="card-header circus">
+        <div class="card-title">Booth Babe Basilisk</div>
+        <div class="card-meta">
+          <span class="card-type-label">Reptile / Effect</span>
+          <span class="card-stats">ATK 1800 / DEF 1800</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-effect-text">Cannot be attacked by monsters with fewer certifications than their controller claims to have. Once per turn: Target one opponent — they cannot evaluate product claims until your next turn. When this card is on the field: All Tool Card costs are hidden from opponents.</div>
+        <div class="card-flavor-text">"The demo is pre-recorded. The pricing is custom. The cocktail hour starts at six."</div>
+        <span class="rarity-tag rarity-rare">Rare</span>
+      </div>
+    </div>
+
+    <div class="card fade-in">
+      <div class="card-header circus">
+        <div class="card-title">Convention Center Lunch</div>
+        <div class="card-meta">
+          <span class="card-type-label">Field Spell</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-effect-text">When activated: All players lose 400 Bandwidth immediately. Each turn during Standby Phase: Each player must decide whether to eat or preserve their Bandwidth. Either way, lose 200 Bandwidth. Monsters with ATK over 2500 refuse to touch it. Cannot be replaced by a better option within 4 blocks.</div>
+        <div class="card-flavor-text">"The Caesar salad is $24. The lettuce has given up."</div>
+        <span class="rarity-tag rarity-common">Common</span>
+      </div>
+    </div>
+
+    <div class="card fade-in">
+      <div class="card-header circus">
+        <div class="card-title">Convention Center Bar</div>
+        <div class="card-meta">
+          <span class="card-type-label">Field Spell — Replaces Lunch</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-effect-text">When activated: All players gain 600 Displayed Bandwidth. Actual Bandwidth unchanged. Each round here: Lose 300 Actual Bandwidth. Displayed increases by 200. All deals made while active are binding but poorly documented. Partnerships formed here require a follow-up email that will never be sent.</div>
+        <div class="card-flavor-text">"It's basically water. But it's $20 and you're going to have three."</div>
+        <span class="rarity-tag rarity-rare">Rare</span>
+      </div>
+    </div>
+
+    <div class="card fade-in">
+      <div class="card-header gold">
+        <div class="card-title">All Access Badge of Unearned Privilege</div>
+        <div class="card-meta">
+          <span class="card-type-label">Equip Spell / Magical Item</span>
+          <span class="card-stats">Thought Leader Tier™</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-effect-text">Cannot be obtained through normal means. Grants access to the VIP Lounge, Speaker Green Room, and a private dinner never announced publicly. Comes with: Rolling Carry-On of Infinite Decks (47 versions of the same presentation), Branded Tumbler of Perpetual Hydration (+200 Displayed Bandwidth/turn), Wireless Clicker of Unearned Confidence (advance someone else's slides once per turn), Business Card That Is Actually a QR Code (adds opponent to newsletter they did not request). Equipped monster's ATK is replaced by their LinkedIn follower count.</div>
+        <div class="card-flavor-text">"He's a keynote. He doesn't do breakout sessions."</div>
+        <span class="rarity-tag rarity-tl">Thought Leader Tier™</span>
+      </div>
+    </div>
+
+    <div class="card fade-in">
+      <div class="card-header circus">
+        <div class="card-title">Badge Lanyard of Dubious Authority</div>
+        <div class="card-meta">
+          <span class="card-type-label">Equip Spell / Magical Item</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-effect-text">Equipped monster gains access to all sessions, keynotes, and restricted areas — in theory. Once per turn: Flip a coin. Heads: Access granted. Tails: Badge reader makes a sound. Nobody knows what the sound means. Equipped monster cannot be questioned about credentials while moving with purpose. When equipped monster stops moving: All authority immediately suspended pending verification.</div>
+        <div class="card-flavor-text">"It scanned yesterday."</div>
+        <span class="rarity-tag rarity-rare">Rare</span>
+      </div>
+    </div>
+
+    <div class="card fade-in">
+      <div class="card-header circus">
+        <div class="card-title">Convention Center Chair</div>
+        <div class="card-meta">
+          <span class="card-type-label">Furniture / Continuous Trap</span>
+          <span class="card-stats">ATK 0 / DEF 0</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-effect-text">Cannot be destroyed because it was never really there. Reduces any monster's DEF by 200 per turn spent sitting. When a player attempts to find seating during Meeting Phase: Reveal this card. That player stands for the remainder of the duel.</div>
+        <div class="card-flavor-text">"There were supposed to be eight."</div>
+        <span class="rarity-tag rarity-common">Common</span>
+      </div>
+    </div>
+
+    <div class="card fade-in">
+      <div class="card-header circus">
+        <div class="card-title">Middle Manager Magpie</div>
+        <div class="card-meta">
+          <span class="card-type-label">Winged Beast / Effect</span>
+          <span class="card-stats">ATK 1600 / DEF 2000</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-effect-text">Once per turn: Steal one counter from any card on the field and add it to this card. Cannot attack directly but can redirect attacks to cards with more counters than it has. When this card has 5+ counters: Gains the title of Senior Middle Manager Magpie. Effects remain identical. Once per duel: Forward an effect to another player without activating it yourself.</div>
+        <div class="card-flavor-text">"I'll take that to leadership and circle back."</div>
+        <span class="rarity-tag rarity-common">Common</span>
+      </div>
+    </div>
+
+    <div class="card fade-in">
+      <div class="card-header circus">
+        <div class="card-title">Vendor Evangelist Hydra</div>
+        <div class="card-meta">
+          <span class="card-type-label">Hydra / Effect</span>
+          <span class="card-stats">ATK 2800 / DEF 2400</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-effect-text">Gains one additional attack per turn for each buzzword spoken (max 3). Once per turn: Shuffle one Agile Ritual from your deck into your opponent's deck. On the convention floor: Gains Booth Space equal to buzzwords spoken this turn.</div>
+        <span class="rarity-tag rarity-ultra">Ultra Rare</span>
+      </div>
+    </div>
+
+    <div class="card fade-in">
+      <div class="card-header circus">
+        <div class="card-title">Principal Consultant Parrot</div>
+        <div class="card-meta">
+          <span class="card-type-label">Winged Beast / Effect</span>
+          <span class="card-stats">ATK 1400 / DEF 3100</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-effect-text">Special Summon condition: PowerPoint Lich must have 8+ Slide Counters. When summoned: Summon 2 additional copies. Each generates a 50-slide presentation — slides 1–25 and 26–50 contain the same information formatted differently. Once per turn: Copy the last Beast-type effect. That Beast does not draw. Cannot be removed while any player has an unread presentation in their graveyard.</div>
+        <div class="card-flavor-text">"I've taken the liberty of putting together a few thoughts."</div>
+        <span class="rarity-tag rarity-ultra">Ultra Rare</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ENVIRONMENT -->
+<section class="environment">
+  <div class="section-label">Convention Floor Environments</div>
+  <h2 class="section-title" style="color:var(--paper)">Where the Action (Doesn't) Happen</h2>
+  <div class="env-grid">
+    <div class="env-item fade-in">
+      <div class="env-name">The Main Floor</div>
+      <div class="env-desc">The primary convention environment. Enables Booth Space purchases. Tradeshow cards may only be summoned here. Noise level prevents Documentation Checks from being heard clearly — all verification effects require one additional turn to resolve.</div>
+    </div>
+    <div class="env-item fade-in">
+      <div class="env-name">The VIP Lounge</div>
+      <div class="env-desc">Accessible only to holders of the All Access Badge of Unearned Privilege. All Bandwidth costs reduced by 30%. All deals made here are assumed to have happened even without documentation. Cannot be entered by any card with ATK below 2000.</div>
+    </div>
+    <div class="env-item fade-in">
+      <div class="env-name">The Keynote Hall</div>
+      <div class="env-desc">During the Keynote Hall environment, all players must face forward. The active Thought Leader Tier™ card's effects are doubled. All other cards' effects are halved. Duration: exactly as long as it needs to be, which is longer than scheduled.</div>
+    </div>
+    <div class="env-item fade-in">
+      <div class="env-name">The Breakout Room</div>
+      <div class="env-desc">Twelve chairs. Forty registrants. When this environment activates, randomly select 28 players who cannot participate this turn. The remaining twelve draw one card. Somehow this is considered a success.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SPOTLIGHT -->
+<section class="spotlight">
+  <div class="spotlight-inner">
+    <div class="spotlight-text fade-in">
+      <div class="section-label">Thought Leader Tier™ Feature Card</div>
+      <h2 class="section-title">Platform and Data<br><em>Lion Tamer</em></h2>
+      <p>She was always a Tradeshow card. The base set was just where she was training. The Corporate Circus is her natural habitat — the convention floor where platform knowledge is currency, certifications are ammunition, and the only thing standing between functional architecture and a vendor-led disaster is one person with a laptop and thirty-seven credentials.</p>
+      <p>Thought Leader Tier™. Exclusively available in the Tradeshows: The Corporate Circus special edition. Not obtainable in the base set. She earned it.</p>
+    </div>
+    <div class="spotlight-card card fade-in">
+      <div class="card-header gold">
+        <div class="card-title">Platform and Data Lion Tamer</div>
+        <div class="card-meta">
+          <span class="card-type-label">Beast-Tamer / Effect</span>
+          <span class="card-stats">ATK 2300 / DEF 2000</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-effect-text">Once per turn: Banish one Certification card from your graveyard; negate an opponent's effect unless they can provide verifiable documentation. On the convention floor: This card cannot be negated by any card that lacks documented proof of concept. When facing Legacy System Minotaur: May attempt to read source code once per duel — flip a coin. Heads: gain 500 ATK. Tails: lose 800 Bandwidth and skip next turn.</div>
+        <div class="card-flavor-text">"She's been in this tent longer than the tent has existed."</div>
+        <div class="tl-badge">Thought Leader Tier™ — Exclusive</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-logo">Indifferencer, Inc.™</div>
+    <p>"Delivering outcomes regardless of intent."</p>
+    <p style="margin-top:0.8rem; font-size:0.7rem; font-family:'DM Sans',sans-serif; color:rgba(245,242,235,0.4)">Tradeshows: The Corporate Circus<br>Special Edition Expansion</p>
+  </div>
+  <div class="footer-col">
+    <h4>Base Set</h4>
+    <a href="index.html">Home</a>
+    <a href="index.html#cards">Card List</a>
+    <a href="index.html#mechanics">Core Mechanics</a>
+  </div>
+  <div class="footer-col">
+    <h4>This Expansion</h4>
+    <a href="#cards">Expansion Cards</a>
+    <a href="#cards">Booth Space Rules</a>
+    <a href="#cards">Convention Environments</a>
+    <a href="#cards">Lion Tamer Spotlight</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© Indifferencer, Inc.™ All outcomes delivered regardless of intent.</p>
+  <p>Booth Space figures represent allocated square footage. Actual presence may vary.</p>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
