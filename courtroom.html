@@ -5,45 +5,78 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Corporate Courtroom: The Debriefings — Indifferencer Litigation Holdings</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0a0a0f;
-    --paper: #f5f2eb;
-    --corp-blue: #1a1a5e;
-    --corp-mid: #2e2e8a;
-    --accent: #c8a84b;
-    --accent-light: #e8d08b;
-    --muted: #6b6b7a;
-    --rule: #d4d0c8;
-    --danger: #8a1a1a;
+    --void: #0d0a05;
+    --mahogany: #1a1008;
+    --panel: #251808;
+    --panel-light: #2e1e0a;
+    --brass: #7a6328;
+    --brass-light: #a8893c;
+    --brass-worn: #6b5520;
+    --parchment: #d4c4a0;
+    --manila: #c4b080;
+    --fluorescent: #e8dfc0;
+    --marble: #4a5648;
+    --stamp: #6b2020;
+    --rule: #3a2810;
+    --rule-light: #4a3518;
+    --muted: #8a7a5a;
+    --ink: #1a1208;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+
   body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
+    font-family: 'Courier Prime', monospace;
+    background: var(--mahogany);
+    color: var(--parchment);
     overflow-x: hidden;
   }
 
-  /* TICKER */
+  /* ART DECO GEOMETRY - CSS only */
+  .deco-border {
+    height: 6px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--brass) 0px, var(--brass) 8px,
+      transparent 8px, transparent 12px,
+      var(--brass-worn) 12px, var(--brass-worn) 16px,
+      transparent 16px, transparent 20px
+    );
+    opacity: 0.7;
+  }
+
+  .deco-border-thin {
+    height: 3px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--brass-worn) 0px, var(--brass-worn) 4px,
+      transparent 4px, transparent 8px
+    );
+    opacity: 0.5;
+  }
+
+  /* TICKER — Court Docket */
   .ticker {
-    background: var(--corp-blue);
-    color: var(--accent-light);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
-    padding: 6px 0;
+    background: var(--void);
+    color: var(--brass-light);
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    padding: 5px 0;
     overflow: hidden;
     white-space: nowrap;
+    border-bottom: 1px solid var(--rule);
   }
   .ticker-inner {
     display: inline-block;
-    animation: ticker 50s linear infinite;
+    animation: ticker 55s linear infinite;
   }
-  .ticker-inner span { margin: 0 3rem; }
+  .ticker-inner span { margin: 0 2rem; }
+  .ticker-inner span::before { content: '▸ '; color: var(--brass-worn); }
   @keyframes ticker {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
@@ -54,476 +87,579 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.2rem 4rem;
-    border-bottom: 1px solid var(--rule);
-    background: var(--paper);
+    padding: 1rem 4rem;
+    background: var(--panel);
     position: sticky;
     top: 0;
     z-index: 100;
+    border-bottom: 1px solid var(--rule);
   }
+  nav::after { content: ''; display: block; position: absolute; bottom: 0; left: 0; right: 0; }
+  .nav-left { display: flex; align-items: baseline; gap: 0; }
   .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
-    color: var(--corp-blue);
+    letter-spacing: 0.08em;
+    color: var(--brass-light);
     text-decoration: none;
+    text-transform: uppercase;
   }
-  .nav-logo span {
-    font-size: 0.65rem;
-    vertical-align: super;
-    font-family: 'DM Mono', monospace;
+  .nav-divider {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    color: var(--brass-worn);
+    margin: 0 0.8rem;
   }
   .nav-sub {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-left: 1rem;
-    padding-left: 1rem;
-    border-left: 1px solid var(--rule);
+    color: var(--muted);
   }
-  .nav-left { display: flex; align-items: center; }
   .nav-links { display: flex; gap: 2.5rem; align-items: center; }
   .nav-links a {
-    font-size: 0.8rem;
-    letter-spacing: 0.06em;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
     text-decoration: none;
     transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--corp-blue); }
-  .nav-cta {
-    background: var(--corp-blue) !important;
-    color: var(--accent-light) !important;
-    padding: 0.5rem 1.2rem !important;
-    font-family: 'DM Mono', monospace !important;
-    font-size: 0.72rem !important;
+  .nav-links a:hover { color: var(--parchment); }
+  .nav-back {
+    background: var(--brass-worn) !important;
+    color: var(--fluorescent) !important;
+    padding: 0.4rem 1rem !important;
+    font-size: 0.65rem !important;
+    letter-spacing: 0.12em !important;
   }
 
   /* HERO */
   .hero {
-    min-height: 88vh;
+    min-height: 92vh;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.1fr 1fr;
     position: relative;
     overflow: hidden;
   }
+
   .hero-left {
-    padding: 6rem 4rem 4rem;
+    padding: 5rem 4rem 4rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background: var(--mahogany);
+    position: relative;
+    z-index: 2;
   }
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
+
+  /* Faded art deco corner ornament */
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    top: 3rem; left: 3rem;
+    width: 80px; height: 80px;
+    border-top: 2px solid var(--brass-worn);
+    border-left: 2px solid var(--brass-worn);
+    opacity: 0.4;
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    bottom: 3rem; right: 0;
+    width: 60px; height: 60px;
+    border-bottom: 2px solid var(--brass-worn);
+    border-right: 2px solid var(--brass-worn);
+    opacity: 0.3;
+  }
+
+  .docket-header {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.62rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
+    color: var(--brass-worn);
+    margin-bottom: 2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--rule-light);
   }
-  .hero-eyebrow::before {
-    content: '';
-    display: inline-block;
-    width: 2rem;
-    height: 1px;
-    background: var(--accent);
+  .docket-number {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--brass-light);
+    margin-bottom: 0.3rem;
   }
+
   .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 4.5vw, 5rem);
-    font-weight: 900;
-    line-height: 1.0;
-    color: var(--corp-blue);
-    margin-bottom: 0.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5.8rem);
+    font-weight: 700;
+    line-height: 0.95;
+    color: var(--fluorescent);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.3rem;
   }
-  .hero h1 em {
+  .hero h1 .subtitle {
+    display: block;
+    font-size: clamp(1.8rem, 3vw, 3.2rem);
     font-style: italic;
-    color: var(--accent);
+    color: var(--brass-light);
+    font-weight: 400;
+    margin-top: 0.2rem;
   }
-  .hero-sub {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-style: italic;
+
+  .hero-rule {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, var(--brass-worn), transparent);
+    margin: 1.5rem 0;
+  }
+
+  .case-details {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.75rem;
+    line-height: 2;
     color: var(--muted);
-    margin-bottom: 2.5rem;
-    line-height: 1.6;
-    max-width: 480px;
+    margin-bottom: 2rem;
   }
-  .tagline-block {
-    border-left: 3px solid var(--accent);
+  .case-details .label {
+    color: var(--brass-worn);
+    display: inline-block;
+    width: 130px;
+    text-transform: uppercase;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+  }
+  .case-details .value { color: var(--parchment); }
+
+  .tagline-stamp {
+    background: var(--panel-light);
+    border: 1px solid var(--rule-light);
+    border-left: 4px solid var(--brass-worn);
     padding: 1rem 1.5rem;
     margin-bottom: 2rem;
-    background: rgba(200,168,75,0.05);
+    position: relative;
+  }
+  .tagline-stamp::before {
+    content: 'FILED';
+    position: absolute;
+    top: -0.5rem; right: 1rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    color: var(--stamp);
+    background: var(--panel-light);
+    padding: 0 0.4rem;
   }
   .tagline-primary {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.05rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
     font-style: italic;
-    font-weight: 700;
-    color: var(--corp-blue);
+    color: var(--fluorescent);
     margin-bottom: 0.4rem;
+    line-height: 1.4;
   }
   .tagline-secondary {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
     letter-spacing: 0.06em;
     color: var(--muted);
+    text-transform: uppercase;
   }
-  .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
   .btn-primary {
-    background: var(--corp-blue);
-    color: var(--accent-light);
-    padding: 0.9rem 2rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
+    background: var(--brass-worn);
+    color: var(--fluorescent);
+    padding: 0.8rem 1.8rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     text-decoration: none;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
+    transition: background 0.2s;
     display: inline-block;
+    border: 1px solid var(--brass);
   }
-  .btn-primary:hover { background: var(--corp-mid); transform: translateY(-1px); }
+  .btn-primary:hover { background: var(--brass); }
   .btn-secondary {
-    color: var(--corp-blue);
-    padding: 0.9rem 2rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
+    color: var(--brass-light);
+    padding: 0.8rem 1.8rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     text-decoration: none;
-    border: 1px solid var(--corp-blue);
+    border: 1px solid var(--brass-worn);
     transition: all 0.2s;
     display: inline-block;
   }
-  .btn-secondary:hover { background: var(--corp-blue); color: var(--accent-light); }
+  .btn-secondary:hover { background: var(--panel-light); color: var(--fluorescent); }
 
+  /* HERO RIGHT — Art Deco Panel */
   .hero-right {
-    background: var(--corp-blue);
+    background: var(--panel);
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4rem;
     overflow: hidden;
   }
+
+  /* Art deco sunburst — faded, barely visible */
   .hero-right::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: repeating-linear-gradient(
-      45deg, transparent, transparent 40px,
-      rgba(200,168,75,0.04) 40px, rgba(200,168,75,0.04) 41px
-    );
-  }
-  .hero-right::after {
-    content: 'ALLEGEDLY';
-    position: absolute;
-    font-family: 'Playfair Display', serif;
-    font-size: 9rem;
-    font-weight: 900;
-    font-style: italic;
-    color: rgba(200,168,75,0.05);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    white-space: nowrap;
-    pointer-events: none;
-    letter-spacing: 0.05em;
+    background:
+      repeating-conic-gradient(
+        from 0deg at 50% 50%,
+        rgba(122, 99, 40, 0.06) 0deg,
+        rgba(122, 99, 40, 0.06) 3deg,
+        transparent 3deg,
+        transparent 6deg
+      );
   }
 
-  /* VERDICT CARDS */
-  .verdict-stack {
+  /* Stepped geometric rings */
+  .deco-seal {
     position: relative;
     z-index: 2;
-    width: 100%;
-    max-width: 320px;
+    width: 280px;
+    height: 280px;
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    align-items: center;
+    justify-content: center;
   }
-  .verdict-card {
-    background: var(--paper);
-    border: 1px solid var(--accent);
-    padding: 1.2rem 1.4rem;
+  .seal-ring {
+    position: absolute;
+    border-radius: 0;
+    border: 1px solid var(--brass-worn);
+    opacity: 0.35;
+    transform: rotate(45deg);
+  }
+  .seal-ring:nth-child(1) { width: 280px; height: 280px; opacity: 0.2; }
+  .seal-ring:nth-child(2) { width: 240px; height: 240px; opacity: 0.25; }
+  .seal-ring:nth-child(3) { width: 200px; height: 200px; border-width: 2px; opacity: 0.3; }
+  .seal-ring:nth-child(4) { width: 160px; height: 160px; opacity: 0.35; }
+  .seal-inner {
     position: relative;
-    transition: transform 0.2s;
+    z-index: 3;
+    text-align: center;
+    padding: 1.5rem;
   }
-  .verdict-card:hover { transform: translateX(6px); }
-  .vc-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.55rem;
-    letter-spacing: 0.12em;
+  .seal-entity {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 0.4rem;
+    color: var(--brass-worn);
+    display: block;
+    margin-bottom: 0.8rem;
   }
-  .vc-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.9rem;
+  .seal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
     font-weight: 700;
-    color: var(--corp-blue);
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 0.4rem;
-    margin-bottom: 0.5rem;
+    color: var(--brass-light);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    display: block;
+    margin-bottom: 0.8rem;
   }
-  .vc-effect {
+  .seal-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--brass-worn);
+    margin: 0.6rem auto;
+    opacity: 0.6;
+  }
+  .seal-motto {
+    font-family: 'Cormorant Garamond', serif;
     font-size: 0.72rem;
-    color: var(--ink);
-    line-height: 1.5;
-  }
-  .vc-flavor {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.65rem;
     font-style: italic;
     color: var(--muted);
-    border-top: 1px solid var(--rule);
-    padding-top: 0.4rem;
-    margin-top: 0.5rem;
+    display: block;
+    letter-spacing: 0.04em;
   }
-  .vc-stats {
-    display: flex;
-    gap: 1rem;
-    margin-top: 0.5rem;
+  .seal-case {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.15em;
+    color: var(--brass-worn);
+    display: block;
+    margin-top: 1rem;
+    text-transform: uppercase;
   }
-  .vc-stat {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.06em;
-  }
-  .vc-atk { color: var(--danger); }
-  .vc-def { color: var(--corp-mid); }
+
+  /* Corner ornaments on hero right */
+  .corner { position: absolute; width: 40px; height: 40px; opacity: 0.3; }
+  .corner-tl { top: 2rem; left: 2rem; border-top: 2px solid var(--brass); border-left: 2px solid var(--brass); }
+  .corner-tr { top: 2rem; right: 2rem; border-top: 2px solid var(--brass); border-right: 2px solid var(--brass); }
+  .corner-bl { bottom: 2rem; left: 2rem; border-bottom: 2px solid var(--brass); border-left: 2px solid var(--brass); }
+  .corner-br { bottom: 2rem; right: 2rem; border-bottom: 2px solid var(--brass); border-right: 2px solid var(--brass); }
 
   /* STRIP */
   .strip {
-    background: var(--accent);
-    padding: 0.8rem 0;
+    background: var(--void);
+    padding: 0.7rem 0;
     overflow: hidden;
     white-space: nowrap;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
   }
   .strip-inner {
     display: inline-block;
-    animation: ticker 35s linear infinite;
+    animation: ticker 40s linear infinite;
   }
   .strip-inner span {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--corp-blue);
+    color: var(--brass-worn);
     margin: 0 2rem;
-    font-weight: 500;
   }
-  .strip-inner span::before { content: '◆  '; }
+  .strip-inner span::before { content: '§  '; }
 
   /* SECTIONS */
-  section { padding: 6rem 4rem; }
+  section { padding: 5rem 4rem; }
   .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--brass-worn);
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
-    gap: 0.8rem;
+    gap: 1rem;
   }
   .section-label::before {
-    content: '';
-    display: inline-block;
-    width: 1.5rem;
-    height: 1px;
-    background: var(--accent);
+    content: '§';
+    color: var(--brass-worn);
+    font-size: 0.8rem;
   }
   .section-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(2rem, 3.5vw, 3.2rem);
-    font-weight: 900;
-    color: var(--corp-blue);
+    font-weight: 700;
+    color: var(--fluorescent);
     line-height: 1.1;
     margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
   }
 
   /* ABOUT */
   .about {
     border-top: 1px solid var(--rule);
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 5rem;
     align-items: start;
+    background: var(--mahogany);
   }
   .about-text p {
-    font-size: 1rem;
-    line-height: 1.8;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.85rem;
+    line-height: 1.9;
     color: var(--muted);
     margin-bottom: 1.2rem;
   }
-  .about-text p strong { color: var(--corp-blue); font-weight: 500; }
-  .about-text p em { font-style: italic; color: var(--ink); }
-  .about-stats {
+  .about-text p strong { color: var(--parchment); font-weight: 700; }
+  .about-text p em { font-style: italic; color: var(--brass-light); }
+
+  /* Government form stats */
+  .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    gap: 0;
+    border: 1px solid var(--rule-light);
   }
-  .stat-box {
-    border: 1px solid var(--rule);
-    padding: 1.5rem;
+  .form-field {
+    padding: 1.2rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
     position: relative;
   }
-  .stat-box::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: var(--accent);
-  }
-  .stat-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    font-weight: 900;
-    color: var(--corp-blue);
-    line-height: 1;
-    margin-bottom: 0.3rem;
-  }
-  .stat-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
+  .form-field:nth-child(even) { border-right: none; }
+  .form-field:nth-last-child(-n+2) { border-bottom: none; }
+  .form-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--brass-worn);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+  .form-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--brass-light);
+    line-height: 1;
+  }
+  .form-value.small {
+    font-size: 1.8rem;
   }
 
-  /* CARD PREVIEW */
-  .preview { background: var(--corp-blue); }
-  .preview .section-label { color: var(--accent); }
-  .preview .section-title { color: var(--paper); }
+  /* CARD PREVIEW — Case Files */
+  .preview {
+    background: var(--panel);
+    border-top: 1px solid var(--rule);
+  }
+  .preview .section-title { color: var(--fluorescent); }
   .preview-intro {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.95rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.78rem;
     font-style: italic;
-    color: rgba(245,242,235,0.55);
-    max-width: 600px;
+    color: var(--muted);
+    max-width: 580px;
     margin-bottom: 3rem;
     line-height: 1.8;
   }
   .preview-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    gap: 1.2rem;
   }
-  .preview-card {
-    background: rgba(245,242,235,0.05);
-    border: 1px solid rgba(200,168,75,0.3);
-    padding: 1.5rem;
+
+  /* Case file aesthetic cards */
+  .case-card {
+    background: var(--mahogany);
+    border: 1px solid var(--rule-light);
+    border-top: 3px solid var(--brass-worn);
+    padding: 1.2rem;
     transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
   }
-  .preview-card:hover {
-    background: rgba(245,242,235,0.1);
-    border-color: var(--accent);
-    transform: translateY(-4px);
+  .case-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 0 20px 20px 0;
+    border-color: transparent var(--panel) transparent transparent;
   }
-  .pc-camp {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.55rem;
-    letter-spacing: 0.1em;
+  .case-card:hover {
+    border-top-color: var(--brass-light);
+    background: var(--panel-light);
+    transform: translateY(-2px);
+  }
+  .cc-type {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    margin-bottom: 0.4rem;
-  }
-  .pc-camp.prosecution { color: #c97070; }
-  .pc-camp.defense { color: #7090c9; }
-  .pc-camp.neutral { color: var(--accent); }
-  .pc-camp.chaos { color: #c970c9; }
-  .pc-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--accent-light);
-    border-bottom: 1px solid rgba(200,168,75,0.25);
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.6rem;
-  }
-  .pc-effect {
-    font-size: 0.75rem;
-    color: rgba(245,242,235,0.7);
-    line-height: 1.6;
-    margin-bottom: 0.6rem;
-  }
-  .pc-footer {
+    color: var(--brass-worn);
+    margin-bottom: 0.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 0.5rem;
   }
-  .pc-flavor {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.65rem;
-    font-style: italic;
-    color: var(--accent);
-    border-top: 1px solid rgba(200,168,75,0.15);
-    padding-top: 0.5rem;
+  .cc-camp {
+    font-size: 0.5rem;
+    padding: 0.1rem 0.4rem;
+    border: 1px solid;
+  }
+  .cc-camp.prosecution { color: var(--stamp); border-color: var(--stamp); }
+  .cc-camp.defense { color: #4a6a8a; border-color: #4a6a8a; }
+  .cc-camp.neutral { color: var(--brass-worn); border-color: var(--brass-worn); }
+  .cc-camp.chaos { color: var(--marble); border-color: var(--marble); }
+  .cc-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--parchment);
+    border-bottom: 1px solid var(--rule-light);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.2;
+  }
+  .cc-effect {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 0.6rem;
+  }
+  .cc-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
     margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--rule);
+  }
+  .cc-flavor {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.68rem;
+    font-style: italic;
+    color: var(--brass-worn);
     flex: 1;
   }
-  .pc-stats {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
+  .cc-stats {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.58rem;
     letter-spacing: 0.06em;
     text-align: right;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
   }
-  .pc-atk { color: #c97070; }
-  .pc-def { color: #7090c9; }
+  .cc-atk { color: var(--stamp); }
+  .cc-def { color: #4a6a8a; }
 
   /* MECHANICS */
-  .mechanics { border-top: 1px solid var(--rule); }
+  .mechanics {
+    border-top: 1px solid var(--rule);
+    background: var(--void);
+  }
   .mechanics-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 0;
     margin-top: 3rem;
+    border: 1px solid var(--rule);
   }
   .mechanic-item {
     padding: 2rem;
-    border: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
     position: relative;
-    overflow: hidden;
-    transition: border-color 0.2s;
   }
-  .mechanic-item:hover { border-color: var(--corp-blue); }
-  .mechanic-item::after {
-    content: '';
-    position: absolute;
-    bottom: 0; right: 0;
-    width: 60px; height: 60px;
-    background: var(--accent);
-    opacity: 0.06;
-    clip-path: polygon(100% 0, 0 100%, 100% 100%);
-  }
-  .mechanic-icon {
-    font-family: 'DM Mono', monospace;
-    font-size: 1.5rem;
-    color: var(--accent);
-    margin-bottom: 0.8rem;
+  .mechanic-item:nth-child(even) { border-right: none; }
+  .mechanic-item:nth-last-child(-n+2) { border-bottom: none; }
+  .mechanic-item:hover { background: rgba(122,99,40,0.04); }
+  .mechanic-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--rule-light);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    opacity: 0.6;
   }
   .mechanic-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
     font-weight: 700;
-    color: var(--corp-blue);
-    margin-bottom: 0.5rem;
+    color: var(--brass-light);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.02em;
   }
   .mechanic-desc {
-    font-size: 0.85rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.75rem;
     color: var(--muted);
-    line-height: 1.7;
+    line-height: 1.8;
   }
 
   /* PHILOSOPHY */
@@ -531,92 +667,105 @@
     border-top: 1px solid var(--rule);
     text-align: center;
     padding: 5rem 4rem;
+    background: var(--mahogany);
+    position: relative;
+  }
+  .philosophy::before {
+    content: '';
+    position: absolute;
+    top: 2rem; left: 2rem; right: 2rem; bottom: 2rem;
+    border: 1px solid var(--rule);
+    pointer-events: none;
+    opacity: 0.4;
   }
   .philosophy blockquote {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: clamp(1.8rem, 3vw, 3rem);
-    font-weight: 900;
+    font-weight: 600;
     font-style: italic;
-    color: var(--corp-blue);
+    color: var(--parchment);
     max-width: 800px;
     margin: 2rem auto;
     line-height: 1.3;
   }
   .philosophy cite {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--brass-worn);
   }
 
   /* FOOTER */
   footer {
-    background: var(--corp-blue);
-    color: rgba(245,242,235,0.5);
+    background: var(--void);
+    color: var(--muted);
     padding: 3rem 4rem;
     display: grid;
     grid-template-columns: 1.4fr 1fr 1fr 1fr;
     gap: 3rem;
-    border-top: 3px solid var(--accent);
+    border-top: 3px solid var(--brass-worn);
   }
   .footer-brand .footer-logo {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 1rem;
     font-weight: 700;
-    color: var(--accent-light);
+    color: var(--brass-light);
     margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
   }
   .footer-brand p {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.62rem;
     letter-spacing: 0.08em;
     font-style: italic;
     margin-bottom: 0.3rem;
   }
   .footer-col h4 {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--brass-worn);
     margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
   }
   .footer-col a {
     display: block;
-    font-size: 0.8rem;
-    color: rgba(245,242,235,0.5);
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
     text-decoration: none;
     margin-bottom: 0.5rem;
     transition: color 0.2s;
   }
-  .footer-col a:hover { color: var(--accent-light); }
+  .footer-col a:hover { color: var(--parchment); }
   .footer-bottom {
-    background: rgba(0,0,0,0.3);
+    background: var(--void);
     padding: 1rem 4rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-top: 1px solid var(--rule);
   }
   .footer-bottom p {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.06em;
-    color: rgba(245,242,235,0.3);
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: var(--brass-worn);
+    opacity: 0.6;
   }
 
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
+  .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 900px) {
     nav { padding: 1rem 1.5rem; }
     .hero { grid-template-columns: 1fr; }
-    .hero-right { min-height: 300px; }
-    section { padding: 4rem 1.5rem; }
+    .hero-right { min-height: 260px; }
+    section { padding: 3.5rem 1.5rem; }
     .about { grid-template-columns: 1fr; gap: 3rem; }
     .preview-grid { grid-template-columns: 1fr; }
     .mechanics-grid { grid-template-columns: 1fr; }
@@ -627,93 +776,96 @@
 </head>
 <body>
 
-<!-- TICKER -->
+<div class="deco-border"></div>
+
+<!-- TICKER — Court Docket -->
 <div class="ticker">
   <div class="ticker-inner">
-    <span>INDIFFERENCER LITIGATION HOLDINGS — PRODUCT IN DEVELOPMENT — CLIENT OUTCOME: PENDING</span>
-    <span>OBJECTION. THIS MEETING COULD HAVE BEEN AN EMAIL.</span>
-    <span>VERDICT TOKEN AWARDED — CLIENT NOT INFORMED</span>
-    <span>CROSS-EXAMINATION ACTIVE — HAND REVEALED</span>
-    <span>HOSTILE WITNESS CANNOT BE CROSS-EXAMINED</span>
-    <span>GROUNDS FOR LEGAL ACTION PLACED ON TABLE</span>
-    <span>AUTHOR'S NOTES: ALLEGEDLY</span>
-    <span>WHERE THE WINNER IS NEVER THE CLIENT</span>
-    <span>INDIFFERENCER LITIGATION HOLDINGS — PRODUCT IN DEVELOPMENT — CLIENT OUTCOME: PENDING</span>
-    <span>OBJECTION. THIS MEETING COULD HAVE BEEN AN EMAIL.</span>
-    <span>VERDICT TOKEN AWARDED — CLIENT NOT INFORMED</span>
-    <span>CROSS-EXAMINATION ACTIVE — HAND REVEALED</span>
-    <span>HOSTILE WITNESS CANNOT BE CROSS-EXAMINED</span>
-    <span>GROUNDS FOR LEGAL ACTION PLACED ON TABLE</span>
-    <span>AUTHOR'S NOTES: ALLEGEDLY</span>
-    <span>WHERE THE WINNER IS NEVER THE CLIENT</span>
+    <span>DOCKET NO. ILH-2025-001 — IN RE: CORPORATE COURTROOM — STATUS: IN DEVELOPMENT</span>
+    <span>OBJECTION SUSTAINED — THIS MEETING COULD HAVE BEEN AN EMAIL</span>
+    <span>VERDICT TOKEN AWARDED — CLIENT OUTCOME: PENDING</span>
+    <span>HOSTILE WITNESS CANNOT BE CROSS-EXAMINED — RULING WITHHELD</span>
+    <span>GROUNDS FOR LEGAL ACTION PLACED ON TABLE — OPPOSING COUNSEL REASSESSING</span>
+    <span>AUTHOR'S NOTES ENTERED INTO EVIDENCE — TEXT: ALLEGEDLY</span>
+    <span>SESSIONS TRIGGERED — NOBODY CALLED THIS MEETING — IT IS SIMPLY HERE</span>
+    <span>DOCKET NO. ILH-2025-001 — IN RE: CORPORATE COURTROOM — STATUS: IN DEVELOPMENT</span>
+    <span>OBJECTION SUSTAINED — THIS MEETING COULD HAVE BEEN AN EMAIL</span>
+    <span>VERDICT TOKEN AWARDED — CLIENT OUTCOME: PENDING</span>
+    <span>HOSTILE WITNESS CANNOT BE CROSS-EXAMINED — RULING WITHHELD</span>
+    <span>GROUNDS FOR LEGAL ACTION PLACED ON TABLE — OPPOSING COUNSEL REASSESSING</span>
+    <span>AUTHOR'S NOTES ENTERED INTO EVIDENCE — TEXT: ALLEGEDLY</span>
+    <span>SESSIONS TRIGGERED — NOBODY CALLED THIS MEETING — IT IS SIMPLY HERE</span>
   </div>
 </div>
 
 <!-- NAV -->
 <nav>
   <div class="nav-left">
-    <a href="index.html" class="nav-logo">Indifferencer, Inc.<span>™</span></a>
+    <a href="index.html" class="nav-logo">Indifferencer, Inc.™</a>
+    <span class="nav-divider">/</span>
     <span class="nav-sub">Litigation Holdings</span>
   </div>
   <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#cards">Cards</a>
-    <a href="#mechanics">Mechanics</a>
-    <a href="index.html" class="nav-cta">← Parent Company</a>
+    <a href="#about">The Case</a>
+    <a href="#cards">Evidence</a>
+    <a href="#mechanics">Procedure</a>
+    <a href="index.html" class="nav-back">← Parent Company</a>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow">Indifferencer Litigation Holdings — In Development</div>
-    <h1>The Corporate<br>Courtroom:<br><em>The Debriefings</em></h1>
-    <p class="hero-sub">An adversarial card game of procedural delay, billable hours, and a client who had a simple question in 2022 and is still waiting for discovery.</p>
+    <div class="docket-header">
+      <div class="docket-number">DOCKET NO. ILH-2025-001</div>
+      Indifferencer Litigation Holdings — Product in Development
+    </div>
 
-    <div class="tagline-block">
+    <h1>The Corporate<br>Courtroom<span class="subtitle">The Debriefings</span></h1>
+
+    <div class="hero-rule"></div>
+
+    <div class="case-details">
+      <div><span class="label">Plaintiff:</span> <span class="value">The Prosecution</span></div>
+      <div><span class="label">Defendant:</span> <span class="value">The Client (Unknown Cause)</span></div>
+      <div><span class="label">Presiding:</span> <span class="value">The Judge (Immune to Attack)</span></div>
+      <div><span class="label">Status:</span> <span class="value">Discovery Pending — Year Three</span></div>
+    </div>
+
+    <div class="tagline-stamp">
       <div class="tagline-primary">"Objection. This meeting could have been an email."</div>
       <div class="tagline-secondary">Every case ends the same way. Somebody leaves with less on.</div>
     </div>
 
     <div class="hero-actions">
-      <a href="#cards" class="btn-primary">Preview the Cards</a>
-      <a href="#mechanics" class="btn-secondary">See the Mechanics</a>
+      <a href="#cards" class="btn-primary">Review the Evidence</a>
+      <a href="#mechanics" class="btn-secondary">Court Procedure</a>
     </div>
   </div>
+
   <div class="hero-right">
-    <div class="verdict-stack">
-      <div class="verdict-card">
-        <div class="vc-label">[Neutral] — Character Card</div>
-        <div class="vc-name">Grounds for Legal Action</div>
-        <div class="vc-effect">Place on the table. Let it sit. Opponent reassesses their life choices.</div>
-        <div class="vc-stats">
-          <span class="vc-stat vc-atk">ATK 10</span>
-          <span class="vc-stat vc-def">DEF 3</span>
-        </div>
-        <div class="vc-flavor">No flavor text. The card speaks for itself.</div>
-      </div>
-      <div class="verdict-card">
-        <div class="vc-label">[Neutral] — Special Mechanic</div>
-        <div class="vc-name">Author's Notes</div>
-        <div class="vc-effect">Played during any recess. Effect TBD. The ambiguity is the effect.</div>
-        <div class="vc-stats">
-          <span class="vc-stat vc-atk">ATK ?</span>
-          <span class="vc-stat vc-def">DEF ?</span>
-        </div>
-        <div class="vc-flavor">allegedly.</div>
-      </div>
-      <div class="verdict-card">
-        <div class="vc-label">[Prosecution] — Character Card</div>
-        <div class="vc-name">The Gatekeeper</div>
-        <div class="vc-effect">Blocks all discovery requests. Cannot be cross-examined. Immune to email.</div>
-        <div class="vc-stats">
-          <span class="vc-stat vc-atk">ATK 3</span>
-          <span class="vc-stat vc-def">DEF 10</span>
-        </div>
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+    <div class="deco-seal">
+      <div class="seal-ring"></div>
+      <div class="seal-ring"></div>
+      <div class="seal-ring"></div>
+      <div class="seal-ring"></div>
+      <div class="seal-inner">
+        <span class="seal-entity">Indifferencer Litigation Holdings</span>
+        <span class="seal-title">Corporate<br>Courtroom</span>
+        <div class="seal-divider"></div>
+        <span class="seal-motto">Where the winner is never the client.</span>
+        <div class="seal-divider"></div>
+        <span class="seal-case">Est. When It Became Necessary</span>
       </div>
     </div>
   </div>
 </section>
+
+<div class="deco-border-thin"></div>
 
 <!-- STRIP -->
 <div class="strip">
@@ -722,143 +874,125 @@
     <span>Sustained</span>
     <span>Overruled</span>
     <span>Allegedly</span>
+    <span>Tab 37</span>
     <span>Contempt of Court</span>
     <span>Legally Binding</span>
-    <span>Tab 37</span>
-    <span>Where the Winner Is Never the Client</span>
+    <span>You Said Yes in Front of Witnesses</span>
+    <span>Per Diem</span>
+    <span>Pro Bono</span>
+    <span>Grounds for Legal Action</span>
     <span>Objection</span>
     <span>Sustained</span>
     <span>Overruled</span>
     <span>Allegedly</span>
+    <span>Tab 37</span>
     <span>Contempt of Court</span>
     <span>Legally Binding</span>
-    <span>Tab 37</span>
-    <span>Where the Winner Is Never the Client</span>
+    <span>You Said Yes in Front of Witnesses</span>
+    <span>Per Diem</span>
+    <span>Pro Bono</span>
+    <span>Grounds for Legal Action</span>
   </div>
 </div>
 
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-text fade-in">
-    <div class="section-label">About the Game</div>
-    <h2 class="section-title">The Game That Has a Verdict.<br><em>Unlike the Meetings.</em></h2>
+    <div class="section-label">The Case</div>
+    <h2 class="section-title">The Game That Has<br>a Verdict. <em>Unlike<br>the Meetings.</em></h2>
     <p>The Corporate Courtroom: The Debriefings is a <strong>standalone adversarial card game</strong> set in the most dangerous arena known to professional life: a corporate legal proceeding in which everyone has an agenda, no one has all the facts, and the client had a simple question two years ago that somehow ended up here.</p>
     <p>A companion to <strong>Meetings: The Blathering</strong>, The Debriefings shares its universe of resigned corporate absurdism but introduces a tighter, more gameable structure. Where Meetings sprawls — because meetings sprawl — <em>a courtroom has a beginning, a middle, and an end.</em></p>
-    <p>Someone wins. Someone loses. The chaos resolves. This is the cathartic counterpoint. The client still does not know the answer to their original question.</p>
-    <a href="#cards" class="btn-primary" style="margin-top:1rem;">Preview the Cards</a>
+    <p>Someone wins. Someone loses. The chaos resolves. The client still does not know the answer to their original question. This is the cathartic counterpoint.</p>
+    <a href="#cards" class="btn-primary" style="margin-top:1rem;">Review the Evidence</a>
   </div>
-  <div class="about-stats fade-in">
-    <div class="stat-box">
-      <div class="stat-number">2–6</div>
-      <div class="stat-label">Players</div>
+  <div class="form-grid fade-in">
+    <div class="form-field">
+      <span class="form-label">Players</span>
+      <div class="form-value">2–6</div>
     </div>
-    <div class="stat-box">
-      <div class="stat-number">3</div>
-      <div class="stat-label">Verdict Tokens to Win</div>
+    <div class="form-field">
+      <span class="form-label">Verdict Tokens to Win</span>
+      <div class="form-value">3</div>
     </div>
-    <div class="stat-box">
-      <div class="stat-number">0</div>
-      <div class="stat-label">Times the Client Has Won</div>
+    <div class="form-field">
+      <span class="form-label">Times Client Has Won</span>
+      <div class="form-value">0</div>
     </div>
-    <div class="stat-box">
-      <div class="stat-number">∞</div>
-      <div class="stat-label">Unanswered Discovery Requests</div>
+    <div class="form-field">
+      <span class="form-label">Unanswered Discovery Requests</span>
+      <div class="form-value small">∞</div>
     </div>
   </div>
 </section>
 
 <!-- CARD PREVIEW -->
 <section class="preview" id="cards">
-  <div class="section-label">Featured Cards</div>
-  <h2 class="section-title" style="color:var(--paper)">The Roster So Far</h2>
-  <p class="preview-intro">A selection from the current card list. All flavor text is testimony. The client has been notified. The client does not know why.</p>
+  <div class="section-label">Evidence</div>
+  <h2 class="section-title">Exhibit A Through Z</h2>
+  <p class="preview-intro">A selection from the current docket. All flavor text is testimony. The client has been notified. The client does not know why they are the defendant.</p>
   <div class="preview-grid">
 
-    <div class="preview-card fade-in">
-      <div class="pc-camp neutral">[Neutral]</div>
-      <div class="pc-name">The Judge</div>
-      <div class="pc-effect">Rules on all objections. Immune to direct attack. Can declare Contempt of Court once per round. Cannot be bribed through standard channels.</div>
-      <div class="pc-footer">
-        <div class="pc-stats"><div class="pc-atk">ATK 0</div><div class="pc-def">DEF 10</div></div>
-      </div>
+    <div class="case-card fade-in">
+      <div class="cc-type"><span>[Neutral] — Character</span><span class="cc-camp neutral">Court</span></div>
+      <div class="cc-name">The Judge</div>
+      <div class="cc-effect">Rules on all objections. Immune to direct attack. Can declare Contempt of Court once per round. Cannot be bribed through standard channels.</div>
+      <div class="cc-footer"><div class="cc-stats"><div class="cc-atk">ATK 0</div><div class="cc-def">DEF 10</div></div></div>
     </div>
 
-    <div class="preview-card fade-in">
-      <div class="pc-camp prosecution">[Prosecution]</div>
-      <div class="pc-name">The Gatekeeper</div>
-      <div class="pc-effect">Blocks all discovery requests. Cannot be cross-examined. Immune to email. Has held this position since 2019. Nobody knows why.</div>
-      <div class="pc-footer">
-        <div class="pc-stats"><div class="pc-atk">ATK 3</div><div class="pc-def">DEF 10</div></div>
-      </div>
+    <div class="case-card fade-in">
+      <div class="cc-type"><span>[Prosecution]</span><span class="cc-camp prosecution">Prosecution</span></div>
+      <div class="cc-name">The Gatekeeper</div>
+      <div class="cc-effect">Blocks all discovery requests. Cannot be cross-examined. Immune to email. Has held this position since 2019.</div>
+      <div class="cc-footer"><span class="cc-flavor">"He's had that access since 2019. We don't know why."</span><div class="cc-stats"><div class="cc-atk">ATK 3</div><div class="cc-def">DEF 10</div></div></div>
     </div>
 
-    <div class="preview-card fade-in">
-      <div class="pc-camp defense">[Defense]</div>
-      <div class="pc-name">Junior Associate</div>
-      <div class="pc-effect">Did all the actual work. Draws 2 extra evidence cards per turn. Credited nowhere. Billing at associate rates.</div>
-      <div class="pc-footer">
-        <div class="pc-stats"><div class="pc-atk">ATK 5</div><div class="pc-def">DEF 3</div></div>
-      </div>
+    <div class="case-card fade-in">
+      <div class="cc-type"><span>[Defense]</span><span class="cc-camp defense">Defense</span></div>
+      <div class="cc-name">Junior Associate</div>
+      <div class="cc-effect">Did all the actual work. Draws 2 extra evidence cards per turn. Credited nowhere.</div>
+      <div class="cc-footer"><div class="cc-stats"><div class="cc-atk">ATK 5</div><div class="cc-def">DEF 3</div></div></div>
     </div>
 
-    <div class="preview-card fade-in">
-      <div class="pc-camp neutral">[Neutral] — Action</div>
-      <div class="pc-name">Legally Binding</div>
-      <div class="pc-effect">Trap card. Played in response to any verbal agreement made during the round. Locks the opponent into whatever they just agreed to. No way out.</div>
-      <div class="pc-footer">
-        <div class="pc-flavor">"You said yes in front of witnesses."</div>
-        <div class="pc-stats"><div class="pc-atk">ATK 6</div><div class="pc-def">DEF 5</div></div>
-      </div>
+    <div class="case-card fade-in">
+      <div class="cc-type"><span>[Neutral] — Action</span><span class="cc-camp neutral">Court</span></div>
+      <div class="cc-name">Legally Binding</div>
+      <div class="cc-effect">Trap card. Played in response to any verbal agreement. Locks the opponent into whatever they just agreed to. No way out.</div>
+      <div class="cc-footer"><span class="cc-flavor">"You said yes in front of witnesses."</span><div class="cc-stats"><div class="cc-atk">ATK 6</div><div class="cc-def">DEF 5</div></div></div>
     </div>
 
-    <div class="preview-card fade-in">
-      <div class="pc-camp neutral">[Neutral] — Evidence</div>
-      <div class="pc-name">Deposition</div>
-      <div class="pc-effect">A 49-tab document in highlighted yellow that everyone must answer questions about under oath. Draw 3 cards.</div>
-      <div class="pc-footer">
-        <div class="pc-flavor">"Please turn to tab 37."</div>
-        <div class="pc-stats"><div class="pc-atk">ATK 4</div><div class="pc-def">DEF 6</div></div>
-      </div>
+    <div class="case-card fade-in">
+      <div class="cc-type"><span>[Evidence]</span><span class="cc-camp neutral">Court</span></div>
+      <div class="cc-name">Deposition</div>
+      <div class="cc-effect">A 49-tab document in highlighted yellow that everyone must answer questions about under oath. Draw 3 cards.</div>
+      <div class="cc-footer"><span class="cc-flavor">"Please turn to tab 37."</span><div class="cc-stats"><div class="cc-atk">ATK 4</div><div class="cc-def">DEF 6</div></div></div>
     </div>
 
-    <div class="preview-card fade-in">
-      <div class="pc-camp chaos">[Chaos]</div>
-      <div class="pc-name">Author's Notes</div>
-      <div class="pc-effect">Played during any recess. Text reads: allegedly. Effect TBD. The ambiguity is the effect.</div>
-      <div class="pc-footer">
-        <div class="pc-flavor">allegedly.</div>
-        <div class="pc-stats"><div class="pc-atk">ATK ?</div><div class="pc-def">DEF ?</div></div>
-      </div>
+    <div class="case-card fade-in">
+      <div class="cc-type"><span>[Chaos]</span><span class="cc-camp chaos">Chaos</span></div>
+      <div class="cc-name">Author's Notes</div>
+      <div class="cc-effect">Played during any recess. Effect TBD. The ambiguity is the effect.</div>
+      <div class="cc-footer"><span class="cc-flavor">allegedly.</span><div class="cc-stats"><div class="cc-atk">ATK ?</div><div class="cc-def">DEF ?</div></div></div>
     </div>
 
-    <div class="preview-card fade-in">
-      <div class="pc-camp neutral">[Neutral] — Action</div>
-      <div class="pc-name">Grounds for Legal Action</div>
-      <div class="pc-effect">Highest ATK card in the deck. Place on the table. Let it sit there while everyone reassesses.</div>
-      <div class="pc-footer">
-        <div class="pc-flavor">No flavor text. The card speaks for itself.</div>
-        <div class="pc-stats"><div class="pc-atk">ATK 10</div><div class="pc-def">DEF 3</div></div>
-      </div>
+    <div class="case-card fade-in">
+      <div class="cc-type"><span>[Neutral] — Action</span><span class="cc-camp neutral">Court</span></div>
+      <div class="cc-name">Grounds for Legal Action</div>
+      <div class="cc-effect">Highest ATK card in the deck. Place on the table. Let it sit there while everyone reassesses their choices.</div>
+      <div class="cc-footer"><span class="cc-flavor">No flavor text. The card speaks for itself.</span><div class="cc-stats"><div class="cc-atk">ATK 10</div><div class="cc-def">DEF 3</div></div></div>
     </div>
 
-    <div class="preview-card fade-in">
-      <div class="pc-camp neutral">[Neutral] — Special</div>
-      <div class="pc-name">Confessions</div>
-      <div class="pc-effect">Post-mortem card. Highest DEF in the deck. Played after the verdict when it no longer changes anything. Self-awareness is protective but late.</div>
-      <div class="pc-footer">
-        <div class="pc-flavor">"Delivered after the verdict. Noted for the record."</div>
-        <div class="pc-stats"><div class="pc-atk">ATK 2</div><div class="pc-def">DEF 9</div></div>
-      </div>
+    <div class="case-card fade-in">
+      <div class="cc-type"><span>[Neutral] — Special</span><span class="cc-camp neutral">Court</span></div>
+      <div class="cc-name">Confessions</div>
+      <div class="cc-effect">Post-mortem card. Highest DEF in the deck. Played after the verdict when it no longer changes anything.</div>
+      <div class="cc-footer"><span class="cc-flavor">"Delivered after the verdict. Noted for the record."</span><div class="cc-stats"><div class="cc-atk">ATK 2</div><div class="cc-def">DEF 9</div></div></div>
     </div>
 
-    <div class="preview-card fade-in">
-      <div class="pc-camp neutral">[Neutral] — Recurring</div>
-      <div class="pc-name">Sessions</div>
-      <div class="pc-effect">Triggers at the start of every round whether anyone played it or not. Nobody scheduled this. It is simply here.</div>
-      <div class="pc-footer">
-        <div class="pc-flavor">"Nobody called this meeting."</div>
-        <div class="pc-stats"><div class="pc-atk">ATK 0</div><div class="pc-def">DEF 3</div></div>
-      </div>
+    <div class="case-card fade-in">
+      <div class="cc-type"><span>[Recurring]</span><span class="cc-camp chaos">Chaos</span></div>
+      <div class="cc-name">Sessions</div>
+      <div class="cc-effect">Triggers at the start of every round whether anyone played it or not. Nobody scheduled this. It is simply here.</div>
+      <div class="cc-footer"><span class="cc-flavor">"Nobody called this meeting."</span><div class="cc-stats"><div class="cc-atk">ATK 0</div><div class="cc-def">DEF 3</div></div></div>
     </div>
 
   </div>
@@ -866,32 +1000,32 @@
 
 <!-- MECHANICS -->
 <section class="mechanics" id="mechanics">
-  <div class="section-label">Core Mechanics</div>
-  <h2 class="section-title">How the Case Fails You</h2>
+  <div class="section-label">Procedure</div>
+  <h2 class="section-title">Rules of the Court</h2>
   <div class="mechanics-grid">
 
     <div class="mechanic-item fade-in">
-      <div class="mechanic-icon">⚖</div>
+      <div class="mechanic-num">01</div>
       <div class="mechanic-title">Camp System</div>
-      <div class="mechanic-desc">Prosecution and Defense function as opposing camps — each with internal hierarchy, aligned incentives, and the ability to play cards across the aisle. The adversarial relationship is structural. You are explicitly attempting to dismantle the other side's case while your own holds up under cross-examination. Neutral cards serve the court, not a camp.</div>
+      <div class="mechanic-desc">Prosecution and Defense function as opposing camps — each with internal hierarchy, aligned incentives, and the ability to play cards across the aisle. The adversarial relationship is structural, not incidental. Neutral cards serve the court itself. They can be activated by either camp under the right conditions.</div>
     </div>
 
     <div class="mechanic-item fade-in">
-      <div class="mechanic-icon">◈</div>
+      <div class="mechanic-num">02</div>
       <div class="mechanic-title">Verdict Tokens</div>
-      <div class="mechanic-desc">At the end of each round, the camp with the higher total ATK wins the round and places one Verdict Token in the jury box. First camp to accumulate 3 Verdict Tokens wins. The Jury Foreperson holds the token physically — control of the Foreperson is a legitimate strategic target. The client is not a strategic target. The client is simply there.</div>
+      <div class="mechanic-desc">At the end of each round, the camp with higher total ATK wins the round and places one Verdict Token in the jury box. First to three wins. The Jury Foreperson holds the token physically. Control of the Foreperson is a legitimate strategic target. The client is not a target. The client is simply there.</div>
     </div>
 
     <div class="mechanic-item fade-in">
-      <div class="mechanic-icon">↺</div>
+      <div class="mechanic-num">03</div>
       <div class="mechanic-title">Cross-Examination</div>
-      <div class="mechanic-desc">The stakeholder meeting equivalent. Force your opponent to reveal their full hand. You choose one card to discard. Can be initiated once per round by the Prosecutor. The person who walked in confident leaves visibly diminished. This is the intended outcome.</div>
+      <div class="mechanic-desc">Force your opponent to reveal their full hand. You choose one card to discard. The person who walked in confident leaves visibly diminished. Initiatable once per round by the Prosecutor. This is the stakeholder meeting. This is the intended outcome.</div>
     </div>
 
     <div class="mechanic-item fade-in">
-      <div class="mechanic-icon">⟁</div>
+      <div class="mechanic-num">04</div>
       <div class="mechanic-title">The Product Lifecycle Trilogy</div>
-      <div class="mechanic-desc">Subpoena → Contempt → Evidence → Appeals. Played in sequence, each card buffs the next. Completing the chain triggers The Full Lifecycle: opponent discards 2 cards, the round extends one additional turn. Nobody remembers what product it was for. The client still does not know the answer to their original question.</div>
+      <div class="mechanic-desc">Subpoena → Contempt → Evidence → Appeals. Played in sequence, each card buffs the next. Completing the chain triggers The Full Lifecycle: opponent discards two cards, the round extends one additional turn. Nobody remembers what the product was for. The client still does not know the answer to their original question.</div>
     </div>
 
   </div>
@@ -901,23 +1035,25 @@
 <section class="philosophy">
   <div class="section-label" style="justify-content:center;">Official Ruling</div>
   <blockquote>"Every case ends the same way.<br>Somebody leaves with less on."</blockquote>
-  <cite>— Indifferencer Litigation Holdings — The Debriefings, Pre-Release Notes</cite>
+  <cite>— Indifferencer Litigation Holdings, Pre-Release Notes, Draft 1.0</cite>
 </section>
+
+<div class="deco-border"></div>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-brand">
     <div class="footer-logo">Indifferencer, Inc.™</div>
     <p>"Delivering outcomes regardless of intent."</p>
-    <p style="margin-top:0.5rem;">Litigation Holdings Division</p>
-    <p style="margin-top:0.8rem; font-size:0.7rem; font-family:'DM Sans',sans-serif;">A product of Indifferencer Litigation Holdings.<br>Client outcome: pending.<br>All flavor text is testimony.</p>
+    <p style="margin-top:0.4rem;">Litigation Holdings Division</p>
+    <p style="margin-top:0.8rem; font-size:0.68rem; font-family:'Courier Prime',monospace; font-style:italic;">Client outcome: pending.<br>All flavor text is testimony.<br>Discovery: year three.</p>
   </div>
   <div class="footer-col">
-    <h4>This Game</h4>
-    <a href="#about">About</a>
-    <a href="#cards">Card Preview</a>
-    <a href="#mechanics">Mechanics</a>
-    <a href="#">Full Card List — Coming Soon</a>
+    <h4>This Case</h4>
+    <a href="#about">The Case</a>
+    <a href="#cards">Evidence</a>
+    <a href="#mechanics">Court Procedure</a>
+    <a href="#">Full Card List — Pending</a>
   </div>
   <div class="footer-col">
     <h4>The Universe</h4>
@@ -934,7 +1070,7 @@
   </div>
 </footer>
 <div class="footer-bottom">
-  <p>© Indifferencer Litigation Holdings — A subsidiary of Indifferencer, Inc.™</p>
+  <p>© Indifferencer Litigation Holdings — A subsidiary of Indifferencer, Inc.™ — Docket No. ILH-2025-001</p>
   <p>Where the winner is never the client. Allegedly.</p>
 </div>
 
