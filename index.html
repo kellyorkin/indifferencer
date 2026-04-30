@@ -17,6 +17,8 @@
     --muted: #6b6b7a;
     --rule: #d4d0c8;
     --danger: #8a1a1a;
+    --oxblood: #5c1010;
+    --oxblood-mid: #7a1515;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -490,6 +492,38 @@
     border-color: var(--accent);
     transform: translateY(-4px);
   }
+
+  /* Corporate Circus — self-sufficient, nature under review */
+  .sub-card-circus { cursor: default; }
+  .sub-card-circus:hover {
+    background: rgba(92,16,16,0.2);
+    border-color: var(--oxblood);
+    transform: translateY(-4px);
+  }
+  .sub-card-circus:hover .sub-entity { color: var(--oxblood-mid); opacity: 1; }
+  .sub-card-circus:hover .sub-name { color: #c47070; }
+  .sub-card-circus:hover .sub-tagline { color: var(--oxblood-mid); border-top-color: rgba(92,16,16,0.3); }
+  .sub-card-circus:hover .sub-status {
+    background: rgba(92,16,16,0.2);
+    border-color: var(--oxblood);
+    color: #c47070;
+  }
+  .sub-card-circus:hover .sub-link { color: #c47070; }
+  .sub-card-circus:hover::after { background: var(--oxblood); opacity: 0.08; }
+
+  /* Circus org chart node */
+  .org-child-circus { transition: all 0.3s; }
+  .org-child-circus:hover {
+    background: rgba(92,16,16,0.25);
+    border-color: var(--oxblood);
+    transform: rotate(1.5deg);
+  }
+  .org-child-circus:hover .org-child-name { color: #c47070; }
+  .org-child-circus:hover .org-status {
+    background: rgba(92,16,16,0.2);
+    border-color: rgba(92,16,16,0.4);
+    color: #c47070;
+  }
   .sub-entity {
     font-family: 'DM Mono', monospace;
     font-size: 0.58rem;
@@ -770,10 +804,10 @@
           <div class="org-child-entity">The Corporate Courtroom:<br>The Debriefings</div>
           <div class="org-status">In Dev</div>
         </div>
-        <div class="org-child">
+        <div class="org-child org-child-circus">
           <div class="org-child-name">Digital Transform. Solutions</div>
-          <div class="org-child-entity">Tradeshows:<br>The Corporate Circus</div>
-          <div class="org-status">Coming Soon</div>
+          <div class="org-child-entity">The Corporate<br>Circus</div>
+          <div class="org-status">Self-Sufficient</div>
         </div>
       </div>
       <div class="org-tbd">
@@ -862,14 +896,14 @@
       </div>
     </div>
 
-    <div class="sub-card fade-in">
-      <div class="sub-entity">Indifferencer Digital Transformation Solutions</div>
-      <div class="sub-name">Tradeshows:<br><em>The Corporate Circus</em></div>
-      <div class="sub-desc">A dedicated expansion set on the convention circuit — where the demos are pre-recorded, the pricing is custom, and the cocktail hour starts at six. Introduces Booth Space as a resource and a new field environment with its own ecosystem of cards, creatures, and catered suffering. A product of Indifferencer Digital Transformation Solutions. The name is the joke.</div>
-      <div class="sub-tagline">"The floor. The demos. The suffering."</div>
+    <div class="sub-card sub-card-circus fade-in">
+      <div class="sub-entity">Indifferencer Digital Transformation Solutions Div. — Ref. Pending</div>
+      <div class="sub-name">The Corporate<br><em>Circus</em></div>
+      <div class="sub-desc">Revenue: Sufficient. Integration: Pending. Nature of Business: Under Review. Indifferencer, Inc.™ is aware that this subsidiary exists and has chosen not to investigate further at this time. It operates independently. Inquiries have been redirected. The cocktail hour starts at six.</div>
+      <div class="sub-tagline">"Digital Transformation Solutions — Revenue: Sufficient — Nature of Business: Under Review"</div>
       <div class="sub-footer">
-        <span class="sub-status">↺ Coming Soon</span>
-        <a href="expansion.html" class="sub-link">Preview →</a>
+        <span class="sub-status">● Self-Sufficient</span>
+        <a href="https://corporatecirc.us" class="sub-link">Enter →</a>
       </div>
     </div>
 
