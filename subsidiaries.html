@@ -720,7 +720,7 @@ body {
             <div class="toggle-row">
               <span>Assign ATK / DEF values to this card</span>
               <label class="toggle">
-                <input type="checkbox" id="hasStats">
+                <input type="checkbox" id="hasStats" checked>
                 <span class="toggle-slider"></span>
               </label>
             </div>
@@ -893,7 +893,7 @@ async function submitCard() {
     document.getElementById('cardBody').value = '';
     document.getElementById('cardType').value = '';
     document.getElementById('cardDeck').value = '';
-    document.getElementById('hasStats').checked = false;
+    document.getElementById('hasStats').checked = true;
 
     setStatus('success', `Concept "${card.title}" filed. Alignment: ${card.alignment}. Integration timeline: TBD.`);
 
