@@ -692,7 +692,7 @@ body {
           </div>
 
           <div class="form-group">
-            <label>Classification </span></label>
+            <label>Classification</label>
             <select id="cardType">
               <option value="" selected>—  The Company Will Assign —</option>
               <option value="Player">Player</option>
@@ -875,7 +875,7 @@ async function submitCard() {
     const card = {
       id: Date.now().toString(),
       timestamp: new Date().toISOString(),
-      title, body, type: data.type
+      title, body, type: data.type,
       deck: data.deck,
       hasStats,
       atk: data.atk ?? null,
