@@ -1,0 +1,11 @@
+{
+    "name": "indifferencer-functions",
+    "private": true,
+    "version": "0.1.0",
+    "description": "Netlify Functions for indifferencer.com — subsidiary card generator (form endpoint + MCP server).",
+    "dependencies": {
+      "@anthropic-ai/sdk": "^0.40.0",
+      "@modelcontextprotocol/sdk": "^1.0.0",
+      "fetch-to-node": "^1.0.0"
+    }
+  }
